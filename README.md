@@ -1,7 +1,7 @@
 # Ironball
 Le jeu consiste à tirer une balle pour viser et toucher des briques qui sont en haut de l’écran. 
 
-A chaque fois que l'on touche un brique :
+A chaque fois que l'on touche une brique :
 
 - On obtient des points selon le type de brique. Les points s’accumulent dans un score.
 - Lorsqu'une ligne de brique est totalement détruite, de nouvelle lignes apparaissent. Le nombre de ligne de brique est toujours le même.
