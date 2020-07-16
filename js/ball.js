@@ -21,7 +21,7 @@ class Ball {
 
     
     moveUp() {
-        // clear tout ??
+        // ctx.clearRect(0,0,W,H);
         this.y-=200;
         this.draw();
         
@@ -36,66 +36,3 @@ class Ball {
 };
 
 
-
-
-// canvas.addEventListener('mouseover', function(e){
-//   raf = window.requestAnimationFrame(draw);
-// });
-
-// canvas.addEventListener("mouseout",function(e){
-//   window.cancelAnimationFrame(raf);
-// });
-
-
-
-// if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-//   ball.vy = -ball.vy;
-// }
-// if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-//   ball.vx = -ball.vx;
-// }
-
-
-
-
-
-
-
-
-//ANIMATION
-// function speed() {
-//   ctx.clearRect(0,0, canvas.width, canvas.height);
-//   ball.draw();
-//   ball.x += ball.vx;
-//   ball.y += ball.vy;
-//   raf = window.requestAnimationFrame(draw);
-// }
-
-
-// class obstacles {
-//     constructor() {
-        
-//     }
-
-//     hits(ball){
-
-//     }
-// }
-
-// class bonus {
-//     constructor() {
-       
-//         this.nbPoint = 0;
-        
-//     }
-
-//     hits(ball){
-
-//     }
-// }
-
-// class lives {
-//     constructor() {
-
-//     }
-// }

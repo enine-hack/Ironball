@@ -3,6 +3,7 @@ let bricks;
 
 
 const ctx = document.querySelector('canvas').getContext('2d');
+
 const W = ctx.canvas.width; // 1000
 const H = ctx.canvas.height; //1530
 
