@@ -1,10 +1,10 @@
 class Ball {
     constructor() {
         this.x = W/2;
-        this.y = H-50;
-        this.vx = 5;
-        this.vy = 2;
-        this.radius = 18;
+        this.y = H-115;
+        this.dx = 5;
+        this.dy = -5;
+        this.radius = 25;
         this.color = 'yellow';
 
 
@@ -19,13 +19,7 @@ class Ball {
 
     }
 
-    
-    moveUp() {
-        // ctx.clearRect(0,0,W,H);
-        this.y-=200;
-        this.draw();
-        
-        }
+
 
 
 

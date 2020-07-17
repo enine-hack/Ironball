@@ -1,26 +1,30 @@
 class Bricks {
     constructor() {
-        this.x = 12; // position x
-        this.y = 12; // position y
-        this.l = 163; // largeur
+        this.l = 100; // largeur
         this.h = 50;  // hauteur
-        this.e = 3; // epaisseur
+        this.padding = 5; // epaisseur
+        this.x = 10; // position x
+        this.y = 10; // position y
         
-        this.color = '#cf0000';
+        this.color = 'red';
     }
 
-    draw() {
-        for (let i = 0; i < 6; i++) { // pour chaque colonne
-            for(let j = 0; j < 10; j++) { // pour chaque ligne
-                ctx.fillStyle = this.color;
-                ctx.fillRect(this.x + i * this.l, this.y + j * this.h, this.l, this.h);
-                ctx.lineWidth = this.e;
-                ctx.strokeStyle = '#262626'
-                ctx.strokeRect(this.x + i * this.l, this.y + j * this.h, this.l, this.h);
+    // draw() {
+    //     for (let c = 0; c < numberOfColumn; c++) { // pour chaque colonne
+    //         for(let r = 0; r < numberOfRow; r++) { // pour chaque ligne
+
+    //             // let brickX = (c*(this.l + this.padding)) + this.x;
+    //             // let brickY = (r*(this.h + this.padding)) + this.y;
+    //             bricks[c][r].x = (c*(this.l + this.padding)) + this.x;
+    //             bricks[c][r].y = (r*(this.h + this.padding)) + this.y;
+    //             ctx.beginPath();
+    //             ctx.fillStyle = this.color;
+    //             ctx.fillRect(0, 0, this.l, this.h);
+    //             ctx.closePath();
                 
-        }
-    }
-    }
+    //         }
+    //     }
+    // }
 }
 
 
