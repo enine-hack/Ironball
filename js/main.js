@@ -7,24 +7,26 @@ let gameover = false;
 let gameoverNotif = document.querySelector('.game-over');
 
 
-//bricks array est 2D
+
 const bricksArray = [];
 
-let brick00;
-let brick01;
-let brick02;
-let brick03;
-let brick04;
-let brick05;
-let brick06;
 
-let brick10;
-let brick11;
-let brick12;
-let brick13;
-let brick14;
-let brick15;
-let brick16;
+//CREATION BRIQUES MANUELLE
+// let brick00;
+// let brick01;
+// let brick02;
+// let brick03;
+// let brick04;
+// let brick05;
+// let brick06;
+
+// let brick10;
+// let brick11;
+// let brick12;
+// let brick13;
+// let brick14;
+// let brick15;
+// let brick16;
 
 
 
@@ -39,8 +41,8 @@ function drawAll() {
   //dessiner ma balle
   ball.draw();
   //dessiner mon tableau de briques
-  for(let r = 0; r<bricksArray.length; r++){
-    bricksArray[r].draw();
+  for(let i = 0; i<bricksArray.length; i++){
+    bricksArray[i].draw();
   }
    
 }
@@ -113,6 +115,16 @@ function animLoop() {
   ball.y += ball.dy;
 
 
+  // collision
+  // for (bricks of bricksArray) {
+  //   if ((ball.x + ball.dx >= bricks.x && ball.x + ball.dx <= bricks.x + bricks.l) && 
+  //      (ball.y + ball.dy <= bricks.y + bricks.h && ball.y + ball.h >= this.y)) {
+  //       ball.dy = -ball.dy;
+  //       };
+      
+  //     gameover = true;
+  // }
+  
 
 
   if (!gameover) {
@@ -137,25 +149,44 @@ function startGame() {
   ball = new Ball();
 
   
+  for (let i = 0; i < 7; i++) {
+    // i: 0
+    for (let j = 0; j < 8; j++) {
+      // i:0, j:0
+      // i:0, j:1
 
-  // brickxy = newBricks(x,y)//+165
-  brick00 = new Bricks(5,-35); new Bricks(170,-35);
-  brick01 = new Bricks(170,-35);
-  brick02 = new Bricks(335,-35);
-  brick03 = new Bricks(500,-35);
-  brick04 = new Bricks(665,-35);
-  brick05 = new Bricks(830,-35);
-  brick06 = new Bricks(995,-35);
-  bricksArray.push(brick00, brick01, brick02, brick03, brick04, brick05, brick06); // bricksArray [brick01, brick02..]
+      // i:1, j:0
+      // i:1, j:1
+
+      // i:2, j:0
+      // i:2, j:1
+
+      // i:3, j:0
+      // ...
+
+      bricksArray.push(new Bricks(i*165 +5, j*55 -35))
+
+    }
+  }
+
+  //brickxy = newBricks(x,y)//+165
+  //brick00 = new Bricks(5,-35)
+  // brick01 = new Bricks(170,-35);
+  // brick02 = new Bricks(335,-35);
+  // brick03 = new Bricks(500,-35);
+  // brick04 = new Bricks(665,-35);
+  // brick05 = new Bricks(830,-35);
+  // brick06 = new Bricks(995,-35);
+  // bricksArray.push(brick00, brick01, brick02, brick03, brick04, brick05, brick06); // bricksArray [brick01, brick02..]
   
-  brick10 = new Bricks(5,20); //+60
-  brick11 = new Bricks(170,20);
-  brick12 = new Bricks(335,20);
-  brick13 = new Bricks(500,20);
-  brick14 = new Bricks(665,20);
-  brick15 = new Bricks(830,20);
-  brick16 = new Bricks(995,20);
-  bricksArray.push(brick10, brick11, brick12, brick13, brick14, brick15, brick16);
+  // brick10 = new Bricks(5,20); //+60
+  // brick11 = new Bricks(170,20);
+  // brick12 = new Bricks(335,20);
+  // brick13 = new Bricks(500,20);
+  // brick14 = new Bricks(665,20);
+  // brick15 = new Bricks(830,20);
+  // brick16 = new Bricks(995,20);
+  // bricksArray.push(brick10, brick11, brick12, brick13, brick14, brick15, brick16);
 
 
   animLoop();

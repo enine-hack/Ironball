@@ -10,16 +10,15 @@ class Bricks {
         this.color = 'red';
     }
 
-    
-
     draw() {
         ctx.beginPath();
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x+this.paddingRight, this.y+this.h+this.paddingBottom, this.l, this.h);
         ctx.closePath();
                 
-            }
-        }
+    }
 
+
+}
 
 
