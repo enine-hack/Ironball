@@ -41,8 +41,8 @@ function drawAll() {
   //dessiner ma balle
   ball.draw();
   //dessiner mon tableau de briques
-  for(let i = 0; i<bricksArray.length; i++){
-    bricksArray[i].draw();
+  for(let c = 0; c<bricksArray.length; c++){
+    bricksArray[c].draw();
   }
    
 }
@@ -110,20 +110,29 @@ function animLoop() {
   
   }
 
+  //(ball.x > bricks.x && ball.x < bricks.x+bricks.l && ball.y > bricks.y && ball.y < bricks.y+bricks.h)
+
+//  collision l,h,prig,pbot,x --> IL FAUT METTRE UN POINT DE DEPART
+  for (const bricks of bricksArray) {
+    // width d'une brique
+    if (ball.x + ball.dx > bricks.x && ball.x + ball.dx < bricks.x+bricks.l){
+      ball.dy = -ball.dy;
+      }
+    // height d'une brique
+    if (ball.y +ball.dy > bricks.y && ball.y + ball.dy < bricks.y+bricks.h){
+      ball.dy = -ball.dy;
+      };
+      
+  //     gameover = true;
+  }
+
+
   //ajouter la valeur de direction x et y (speed)
   ball.x += ball.dx;
   ball.y += ball.dy;
 
 
-  // collision
-  // for (bricks of bricksArray) {
-  //   if ((ball.x + ball.dx >= bricks.x && ball.x + ball.dx <= bricks.x + bricks.l) && 
-  //      (ball.y + ball.dy <= bricks.y + bricks.h && ball.y + ball.h >= this.y)) {
-  //       ball.dy = -ball.dy;
-  //       };
-      
-  //     gameover = true;
-  // }
+
   
 
 
