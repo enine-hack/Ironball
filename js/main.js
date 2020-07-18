@@ -6,18 +6,28 @@ let ball;
 let gameover = false;
 let gameoverNotif = document.querySelector('.game-over');
 
-// let numberOfRow = 3
-// let numberOfColumn = 4
-// let bricks = [];
-// // creer le tableau 2D et attribuer des coordonnées x et y
-// for(let c = 0; c < numberOfColumn; c++) {
-//   bricks[c] = [];
-//   for(let r = 0; r < numberOfRow; r++) {
-//      bricks[c][r] = { x: 0, y: 0}; 
-//      bricks[c][r].x = (c*(this.l + this.padding)) + this.x;
-//      bricks[c][r].y = (r*(this.h + this.padding)) + this.y;
-//   }
-// }
+
+//bricks array est 2D
+const bricksArray = [];
+
+let brick00;
+let brick01;
+let brick02;
+let brick03;
+let brick04;
+let brick05;
+let brick06;
+
+let brick10;
+let brick11;
+let brick12;
+let brick13;
+let brick14;
+let brick15;
+let brick16;
+
+
+
 
 const ctx = document.getElementById('canvas').getContext('2d');
 const W = ctx.canvas.width;
@@ -29,11 +39,11 @@ function drawAll() {
   //dessiner ma balle
   ball.draw();
   //dessiner mon tableau de briques
-    // c pour colonne et r pour row
-  // bricks.draw();
-  
+  for(let r = 0; r<bricksArray.length; r++){
+    bricksArray[r].draw();
+  }
+   
 }
-
 
 // faire bouger mon plateau
 document.addEventListener('keydown', keyDownPress, false);
@@ -102,6 +112,9 @@ function animLoop() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
+
+
+
   if (!gameover) {
     raf = requestAnimationFrame(animLoop);
   } else if (gameover);
@@ -123,9 +136,28 @@ function startGame() {
 
   ball = new Ball();
 
-  // bricks = new Bricks();
- 
-    
+  
+
+  // brickxy = newBricks(x,y)//+165
+  brick00 = new Bricks(5,-35); new Bricks(170,-35);
+  brick01 = new Bricks(170,-35);
+  brick02 = new Bricks(335,-35);
+  brick03 = new Bricks(500,-35);
+  brick04 = new Bricks(665,-35);
+  brick05 = new Bricks(830,-35);
+  brick06 = new Bricks(995,-35);
+  bricksArray.push(brick00, brick01, brick02, brick03, brick04, brick05, brick06); // bricksArray [brick01, brick02..]
+  
+  brick10 = new Bricks(5,20); //+60
+  brick11 = new Bricks(170,20);
+  brick12 = new Bricks(335,20);
+  brick13 = new Bricks(500,20);
+  brick14 = new Bricks(665,20);
+  brick15 = new Bricks(830,20);
+  brick16 = new Bricks(995,20);
+  bricksArray.push(brick10, brick11, brick12, brick13, brick14, brick15, brick16);
+
+
   animLoop();
      
 };
