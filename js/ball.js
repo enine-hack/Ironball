@@ -6,7 +6,7 @@ class Ball {
         this.dy = -5;
         this.radius = 25;
         this.color = 'yellow';
-
+        
 
     }
 

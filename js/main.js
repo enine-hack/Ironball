@@ -19,7 +19,6 @@ const bricksArray = [];
 // let brick04;
 // let brick05;
 // let brick06;
-
 // let brick10;
 // let brick11;
 // let brick12;
@@ -27,9 +26,6 @@ const bricksArray = [];
 // let brick14;
 // let brick15;
 // let brick16;
-
-
-
 
 const ctx = document.getElementById('canvas').getContext('2d');
 const W = ctx.canvas.width;
@@ -41,11 +37,14 @@ function drawAll() {
   //dessiner ma balle
   ball.draw();
   //dessiner mon tableau de briques
-  for(let c = 0; c<bricksArray.length; c++){
-    bricksArray[c].draw();
+  for (const bricks of bricksArray) {
+    // si la brique n'est pas touché
+    if(!bricks.hitted){
+      bricks.draw();
+    }
   }
-   
 }
+
 
 // faire bouger mon plateau
 document.addEventListener('keydown', keyDownPress, false);
@@ -69,9 +68,9 @@ function keyUpRelease(direction) {
 
 
 let raf; 
-// let frames = 0;
+
 function animLoop() {
-  // frames++;
+
   // effacer le canvas
   ctx.clearRect(0, 0, W, H);
 
@@ -107,33 +106,28 @@ function animLoop() {
         gameoverNotif.style.display = 'flex';
         return;
       }
-  
   }
 
-  //(ball.x > bricks.x && ball.x < bricks.x+bricks.l && ball.y > bricks.y && ball.y < bricks.y+bricks.h)
+//ajouter la valeur de direction x et y (speed)
+ball.x += ball.dx;
+ball.y += ball.dy;
 
-//  collision l,h,prig,pbot,x --> IL FAUT METTRE UN POINT DE DEPART
+//  collision
   for (const bricks of bricksArray) {
-    // width d'une brique
-    if (ball.x + ball.dx > bricks.x && ball.x + ball.dx < bricks.x+bricks.l){
-      ball.dy = -ball.dy;
+      if (ball.x > bricks.x && ball.x + ball.dx < bricks.x + bricks.l && 
+        ball.y + ball.radius > bricks.y && ball.y < bricks.y + bricks.h) {
+          console.log("hit!");
+          ball.dy = -ball.dy;
+          bricks.hitted = true;  
       }
-    // height d'une brique
-    if (ball.y +ball.dy > bricks.y && ball.y + ball.dy < bricks.y+bricks.h){
-      ball.dy = -ball.dy;
-      };
-      
-  //     gameover = true;
+    
   }
 
-
-  //ajouter la valeur de direction x et y (speed)
-  ball.x += ball.dx;
-  ball.y += ball.dy;
-
-
-
   
+
+
+
+    
 
 
   if (!gameover) {
@@ -160,7 +154,7 @@ function startGame() {
   
   for (let i = 0; i < 7; i++) {
     // i: 0
-    for (let j = 0; j < 8; j++) {
+    for (let j = 0; j < 20; j++) {
       // i:0, j:0
       // i:0, j:1
 
@@ -178,7 +172,7 @@ function startGame() {
     }
   }
 
-  //brickxy = newBricks(x,y)//+165
+  //brickxy = newBricks(x,y)
   //brick00 = new Bricks(5,-35)
   // brick01 = new Bricks(170,-35);
   // brick02 = new Bricks(335,-35);
@@ -217,10 +211,6 @@ $bouton.addEventListener('click', () => {
 
 
 
-
-
-
-  // ne pas oublier l'autostart
 
 
 
