@@ -7,26 +7,25 @@ class Ball {
         this.radius = 25;
         this.color = 'yellow';
         
+        
 
     }
 
     draw() {
+
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-        ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
+        ctx.closePath();
+
+        
 
     }
 
 
 
 
-
-
-    speedUp(){
-
-    }
 };
 
 

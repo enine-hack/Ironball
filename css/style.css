@@ -1,17 +1,18 @@
-/* font-family: 'Abel', sans-serif;
-font-family: 'Teko', sans-serif;
+/*font-family: 'Roboto', sans-serif;
+font-family: 'Rubik', sans-serif;
+
 */
 
 
 body {
 
     background: linear-gradient(rgb(0, 0, 0), rgb(148, 148, 148));
-    background-repeat: no-repeat;
     
+    background-repeat: no-repeat;
     width: 100%;
     min-height: 100vh;
     color: white;
-    font-family: 'Abel', sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
     
 }
@@ -33,24 +34,24 @@ body {
 
 h1 {
     position: relative;
+    margin-block-start: 0;
+    margin-block-end: 0;
     font-size: 150px;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    text-align: center;
 }
 
-p {
-    font-size: 30px;
-}
 
 #start-button {
     position:relative;   
-    width: 250px;
-    height: 90px;   
-    background-color: #FCFF53;
-    font-family: 'Teko', sans-serif;
-    font-size: 50px;
-    
+    width: 500px;
+    height: 100px;   
+    background-color: yellow;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    margin-top: 150px;
     margin-bottom: 50px;
+    color : black;
+    border-radius: 10px;
 }
 
 .game-over {
@@ -69,9 +70,9 @@ p {
 }
 
 .game-over h1 {
-    font-family: 'Teko', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 150px;
-    font-weight: bold;
+    font-weight: bolder;
     margin-bottom: 0;
 }
 

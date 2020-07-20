@@ -36,6 +36,7 @@ function drawAll() {
   paddle.draw();
   //dessiner ma balle
   ball.draw();
+
   //dessiner mon tableau de briques
   for (const bricks of bricksArray) {
     // si la brique n'est pas touché
@@ -72,36 +73,46 @@ let raf;
 function animLoop() {
 
   // effacer le canvas
-  ctx.clearRect(0, 0, W, H);
+  // LE FOND DEVIENT BLANC !!
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.fillRect(0,0,W,H);
+  
+
+  
+ 
 
   // tout redessiner
   drawAll();
 
+
   // faire bouger le paddle droite-gauche
-  if(rightPressed && paddle.x < W-paddle.l) {
-    paddle.x += 7;
+  if(rightPressed && paddle.r < W && paddle.x < W-paddle.x+paddle.r) {
+    paddle.x += paddle.dx;
+    paddle.r += paddle.dx;
+    
   } else if(leftPressed && paddle.x > 0) {
-    paddle.x -= 7;
+    paddle.x -= paddle.dx;
+    paddle.r -= paddle.dx;
   }
 
   // faire rebondir la balle dans le canvas sauf le bord bas
     // si la position x est > à la largeur du canvas ou si elle est < à 0
-  if(ball.x + ball.dx > W - ball.radius || ball.x + ball.dx < ball.radius) {
+  if(ball.x + ball.dx >= W - ball.radius || ball.x + ball.dx <= ball.radius) {
     // inverser la direction de x
     ball.dx = -ball.dx; 
   }
 
     // si la position y est < à la hauteur du canvas (ordonnees y inversées !)
-  if(ball.y + ball.dy < ball.radius) {
+  if(ball.y + ball.dy <= ball.radius) {
     // inverser la direction de y
     ball.dy = -ball.dy;
     // si la position y est > à la position y depasse le canvas en bas (ordonnees y inversées !)
-  } else if(ball.y + ball.dy > paddle.y - ball.radius) {
+  } else if(ball.y + ball.dy >= paddle.y - ball.radius) {
     // si la balle atteri sur le paddle => si la balle est à droite du bord gauche du paddle ET < au bord droit du paddle
-      if(ball.x > paddle.x && ball.x < paddle.x + paddle.l) {
+      if(ball.x >= paddle.x && ball.x <= paddle.x + paddle.l) {
         // inverser la direction de y
         ball.dy = -ball.dy;
-      } else if(ball.y + ball.dy > H + ball.radius) {
+      } else if(ball.y + ball.dy >= H + ball.radius) {
         // afficher gameover
         gameoverNotif.style.display = 'flex';
         return;
@@ -112,10 +123,10 @@ function animLoop() {
 ball.x += ball.dx;
 ball.y += ball.dy;
 
-//  collision
+//  COLLISION
   for (const bricks of bricksArray) {
-      if (ball.x > bricks.x && ball.x + ball.dx < bricks.x + bricks.l && 
-        ball.y + ball.radius > bricks.y && ball.y < bricks.y + bricks.h) {
+      if (ball.x + ball.dx >= bricks.x && ball.x + ball.dx <= bricks.x + bricks.l && 
+        ball.y + ball.dy>= bricks.y && ball.y + ball.dy <= bricks.y + bricks.h) {
           console.log("hit!");
           ball.dy = -ball.dy;
           bricks.hitted = true;  
@@ -154,7 +165,7 @@ function startGame() {
   
   for (let i = 0; i < 7; i++) {
     // i: 0
-    for (let j = 0; j < 20; j++) {
+    for (let j = 0; j < 10; j++) {
       // i:0, j:0
       // i:0, j:1
 
