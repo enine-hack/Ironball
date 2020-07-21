@@ -2,7 +2,7 @@ class Paddle {
     constructor() {
 
         this.l = 170;
-        this.h = 35;
+        this.h = 25;
         this.x = (W - this.l) /2;
         this.y = H-90;
         this.color = 'blue';
@@ -10,7 +10,7 @@ class Paddle {
         
         this.r = this.x + this.l;
         this.b = this.y + this.h;
-        this.radius = 20;
+        this.radius = 10;
 
 
     }

@@ -7,7 +7,7 @@ class Bricks {
         this.x = x; // position x
         this.y = y; // position y
         
-        this.color = 'red';
+        this.color = '#ba1c1c';
         this.hitted = false;
         
         

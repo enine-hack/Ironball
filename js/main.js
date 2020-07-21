@@ -4,11 +4,8 @@ let leftPressed = false;
 
 let ball;
 let gameover = false;
-let gameoverNotif = document.querySelector('.game-over');
-
-// let win = false;
-// let winNotif = document.querySelector('.win');
-
+let $gameoverNotif = document.querySelector('.game-over');
+let $winNotif = document.querySelector('.win');
 
 let bricksArray = [];
 
@@ -35,6 +32,7 @@ const H = ctx.canvas.height;
 function drawAll() {
   //dessiner mon plateau
   paddle.draw();
+
   //dessiner ma balle
   ball.draw();
 
@@ -75,6 +73,7 @@ function animLoop() {
   // LE FOND DEVIENT BLANC !!
   ctx.fillStyle = 'rgba(255,255,255,0.3)';
   ctx.fillRect(0,0,W,H);
+  // ctx.clearRect(0,0,W,H)
   
 
   // tout redessiner
@@ -110,7 +109,7 @@ function animLoop() {
         ball.dy = -ball.dy;
       } else if(ball.y + ball.dy >= H + ball.radius) {
         // afficher gameover
-        gameoverNotif.style.display = 'flex';
+        $gameoverNotif.style.display = 'flex';
         return;
       }
   }
@@ -119,52 +118,39 @@ function animLoop() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
-//  COLLISION
-
+//  COLLISION => LA BALLE NE DETRUIT PAS LA PREMIERE LIGNE !!
   function collision () {
     for(let i = 0; i < bricksArray.length ; i ++) {
-      let n = 1; // le nombre de suppression
-      if(ball.x + ball.dx >= bricksArray[i].x && ball.x + ball.dx <= bricksArray[i].x + bricksArray[i].l && 
-        ball.y + ball.dy>= bricksArray[i].y && ball.y + ball.dy <= bricksArray[i].y + bricksArray[i].h) {
-          ball.dy = -ball.dy;
-          bricksArray[i].hitted = true;
-          bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n)
+      let n = 1; // le nombre de brique à supprime
+      
+      if(ball.x + ball.dx > bricksArray[i].x && ball.x + ball.dx < bricksArray[i].x + bricksArray[i].l && 
+      ball.y + ball.dy > bricksArray[i].y && ball.y + ball.dy < bricksArray[i].y + bricksArray[i].h) {
+        ball.dy = -ball.dy;
+        bricksArray[i].hitted = true;
+        bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
+        }
       }
-    }
-  return bricksArray;
-  }
-    
+        return bricksArray;
+      }
+  
   collision();
+  
+  if(bricksArray = []) {
+      $winNotif.style.display = 'flex';
+      return;
+      }
 
-
+  // GAMEOVER
   if (!gameover) {
     raf = requestAnimationFrame(animLoop);
     } else if (gameover) {
-      gameoverNotif.addEventListener('click',() => {
-      gameoverNotif.style.display = 'none';
+      $gameoverNotif.addEventListener('click',() => {
+      $gameoverNotif.style.display = 'none';
       startGame();
       });
     };
 
 }
-
-
-//   if (!gameover) {
-//     raf = requestAnimationFrame(animLoop);
-//     } else if (win) {
-//       winNotif.addEventListener('click',() => {
-//       winNotif.style.display = 'none';
-//       startGame();
-//       });
-//     } else if (gameover) {
-//       gameoverNotif.addEventListener('click',() => {
-//       gameoverNotif.style.display = 'none';
-//       startGame();
-//       });
-//     };
-
-// }
-
 
 function startGame() {
   if (raf) {
@@ -172,13 +158,10 @@ function startGame() {
   }
 
   paddle = new Paddle();
-
   ball = new Ball();
-
-  
   for (let i = 0; i < 7; i++) {
     // i: 0
-    for (let j = 0; j < 10; j++) {
+    for (let j = 0; j < 3; j++) {
       // i:0, j:0
       // i:0, j:1
 
@@ -194,7 +177,7 @@ function startGame() {
       bricksArray.push(new Bricks(i*165 +5, j*55 -35))
 
     }
-  }
+  };
 
   //brickxy = newBricks(x,y)
   //brick00 = new Bricks(5,-35)
@@ -214,7 +197,6 @@ function startGame() {
   // brick15 = new Bricks(830,20);
   // brick16 = new Bricks(995,20);
   // bricksArray.push(brick10, brick11, brick12, brick13, brick14, brick15, brick16);
-
 
   animLoop();
      

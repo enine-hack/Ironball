@@ -1,25 +1,23 @@
-/*font-family: 'Roboto', sans-serif;
-font-family: 'Rubik', sans-serif;
+/*font-family: 'Abel', sans-serif;
+font-family: 'Saira Semi Condensed', sans-serif;
 
 */
 
 
 body {
-
     background: linear-gradient(rgb(0, 0, 0), rgb(148, 148, 148));
-    
     background-repeat: no-repeat;
     width: 100%;
     min-height: 100vh;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Saira Semi Condensed', sans-serif;
     text-align: center;
     font-size: 30px;
     
 }
 
 #game-board {
-    margin-top: 30px;
+    margin-top: 100px;
     display: inline-block;
     border: solid 1px #C2C2C2;
     
@@ -33,6 +31,10 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.start-item p {
+    font-family: 'Abel', sans-serif;
+}
+
 h1 {
     position: relative;
     margin-block-start: 0;
@@ -44,15 +46,25 @@ h1 {
 
 #start-button {
     position:relative;   
-    width: 500px;
-    height: 100px;   
+    width: 300px;
+    height: 70px;   
     background-color: yellow;
-    font-family: 'Roboto', sans-serif;
-    font-size: 40px;
+    
+    font-family: 'Abel', sans-serif;
+    font-size: 30px;
     margin-top: 150px;
     margin-bottom: 50px;
     color : black;
+    font-weight: bold;
     border-radius: 10px;
+}
+
+#start-button:hover {
+
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+   
 }
 
 .game-over {
@@ -71,7 +83,7 @@ h1 {
 }
 
 .game-over h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Saira Semi Condensed', sans-serif;
     font-size: 100px;
     font-weight: bolder;
     margin-bottom: 0;
@@ -79,6 +91,7 @@ h1 {
 
 .game-over p {
     font-size : 40px;
+    font-family: 'Abel', sans-serif;
     
 }
 
@@ -98,7 +111,7 @@ h1 {
 }
 
 .win h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Saira Semi Condensed', sans-serif;
     font-size: 100px;
     font-weight: bolder;
     margin-bottom: 0;
@@ -106,5 +119,6 @@ h1 {
 
 .win p {
     font-size : 40px;
+    font-family: 'Abel', sans-serif;
     
 }
