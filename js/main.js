@@ -45,7 +45,13 @@ function drawAll() {
     }
   }
 
-  speedUpItems.draw();
+  //setInterval(speedUpItems.draw(), 1000);
+ 
+  if (frames % 500 === 0) {
+    speedUpItems = new SpeedUpItem()
+  }
+  speedUpItems.draw()
+  
 
 }
 
@@ -70,18 +76,18 @@ function keyUpRelease(direction) {
 }
 
 
-let raf; 
+let raf;
+let frames = 0;
 function animLoop() {
+  frames++;
 
   // effacer le canvas
-  // LE FOND DEVIENT BLANC !!
-  ctx.fillStyle = 'rgba(255,255,255,0.3)';
-  ctx.fillRect(0,0,W,H);
-  // ctx.clearRect(0,0,W,H)
+  ctx.clearRect(0,0,W,H)
   
 
   // tout redessiner
   drawAll();
+
 
 
   // faire bouger le paddle droite-gauche
@@ -113,8 +119,8 @@ function animLoop() {
         ball.dy = -ball.dy;
       } else if(ball.y + ball.dy >= H + ball.radius) {
         // afficher gameover
-        $gameoverNotif.style.display = 'flex';
-        return;
+        gameover = true
+
       }
   }
 
@@ -145,32 +151,26 @@ function animLoop() {
       }
 
 //  SPEED UP ITEMS
-if(ball.x >= speedUpItems.x && ball.x <= speedUpItems.x + speedUpItems.l
-  && ball.y >= speedUpItems.y && speedUpItems.y <= speedUpItems.y + speedUpItems.h) {
-    ball.dx = 7;
-    ball.dy = -7;
+  if(ball.x >= speedUpItems.x && ball.x <= speedUpItems.x + speedUpItems.l
+    && ball.y >= speedUpItems.y && ball.y <= speedUpItems.y + speedUpItems.h*2) {
+      ball.dx = 10;
+      ball.dy = -10;
+    }
+
+  if (gameover) {
+    $gameoverNotif.style.display = 'flex';
+        
   }
+
 
 // GAMEOVER = ELSE IF NE MARCHE PAS
   if (!gameover) {
     raf = requestAnimationFrame(animLoop);
-    } else if(gameover) {
-      console.log('ca marche')
-      $gameoverNotif.addEventListener('click',() => {
-        
-      $gameoverNotif.style.display = 'none';
-      startGame();
-      });
-      
-    } else if(win) {
-      $winNotif.addEventListener('click',() => {
-      $winNotif.style.display = 'none';
-      startGame();
-      });
     }
 }
 
 function startGame() {
+  gameover = false;
   if (raf) {
     cancelAnimationFrame(raf);
   }
@@ -216,13 +216,25 @@ function startGame() {
   // brick16 = new Bricks(995,20);
   // bricksArray.push(brick10, brick11, brick12, brick13, brick14, brick15, brick16);
 
-  speedUpItems = new speedUpItem();
+  speedUpItems = new SpeedUpItem();
+    
+  
 
   animLoop();
      
 };
 
+$gameoverNotif.addEventListener('click', () => {
+  console.log('hr');
+  // si on me clique dessus sans que je sois gameover, STOP
+  if (!gameover) return;
+  console.log('oo');
 
+
+  // sinon
+  $gameoverNotif.style.display = 'none';
+  startGame();
+})
 
 let $bouton = document.querySelector('#start-button');
 $bouton.addEventListener('click', () => {
@@ -230,6 +242,7 @@ $bouton.addEventListener('click', () => {
   document.querySelector(".start-item").style.visibility = "hidden";
   // démarrer le jeu
   startGame();
+
   
 });
 

@@ -2,19 +2,18 @@ function random(from, to) {
     return Math.floor(from + Math.random()*(to - from));
   }
   
-  class speedUpItem {
+  class SpeedUpItem {
     constructor() {
-      this.l = 70;
-      this.h = 10;
+      this.l = 50;
+      this.h = 20;
       this.x = random(0, W-this.l + 3);
       this.y = random(H/2, 3/4*H); // between 1/2 and 3/4 of H
-      this.color = 'green';
+      this.color = 'white';
         
       this.r = this.x + this.l;
       this.b = this.y + this.h;
       this.radius = 5;
-
-      this.dx += 5;
+     
     }
 
     draw() {
