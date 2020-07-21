@@ -10,6 +10,7 @@ class Bricks {
         this.color = 'red';
         this.hitted = false;
         
+        
 
         
     }
@@ -22,9 +23,7 @@ class Bricks {
                 
     }
 
-    undraw() {
-        ctx.clearRect(this.x+this.paddingRight, this.y+this.paddingBottom, this.l, this.h);
-    }
+
 
 }
 

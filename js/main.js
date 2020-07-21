@@ -6,10 +6,11 @@ let ball;
 let gameover = false;
 let gameoverNotif = document.querySelector('.game-over');
 
+// let win = false;
+// let winNotif = document.querySelector('.win');
 
 
-const bricksArray = [];
-
+let bricksArray = [];
 
 //CREATION BRIQUES MANUELLE
 // let brick00;
@@ -39,13 +40,12 @@ function drawAll() {
 
   //dessiner mon tableau de briques
   for (const bricks of bricksArray) {
-    // si la brique n'est pas touché
-    if(!bricks.hitted){
+    if (!bricks.hitted){
       bricks.draw();
     }
   }
-}
 
+}
 
 // faire bouger mon plateau
 document.addEventListener('keydown', keyDownPress, false);
@@ -69,7 +69,6 @@ function keyUpRelease(direction) {
 
 
 let raf; 
-
 function animLoop() {
 
   // effacer le canvas
@@ -77,9 +76,6 @@ function animLoop() {
   ctx.fillStyle = 'rgba(255,255,255,0.3)';
   ctx.fillRect(0,0,W,H);
   
-
-  
- 
 
   // tout redessiner
   drawAll();
@@ -119,38 +115,55 @@ function animLoop() {
       }
   }
 
-//ajouter la valeur de direction x et y (speed)
-ball.x += ball.dx;
-ball.y += ball.dy;
+  //ajouter la valeur de direction x et y (speed)
+  ball.x += ball.dx;
+  ball.y += ball.dy;
 
 //  COLLISION
-  for (const bricks of bricksArray) {
-      if (ball.x + ball.dx >= bricks.x && ball.x + ball.dx <= bricks.x + bricks.l && 
-        ball.y + ball.dy>= bricks.y && ball.y + ball.dy <= bricks.y + bricks.h) {
-          console.log("hit!");
+
+  function collision () {
+    for(let i = 0; i < bricksArray.length ; i ++) {
+      let n = 1; // le nombre de suppression
+      if(ball.x + ball.dx >= bricksArray[i].x && ball.x + ball.dx <= bricksArray[i].x + bricksArray[i].l && 
+        ball.y + ball.dy>= bricksArray[i].y && ball.y + ball.dy <= bricksArray[i].y + bricksArray[i].h) {
           ball.dy = -ball.dy;
-          bricks.hitted = true;  
+          bricksArray[i].hitted = true;
+          bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n)
       }
-    
+    }
+  return bricksArray;
   }
-
-  
-
-
-
     
+  collision();
 
 
   if (!gameover) {
     raf = requestAnimationFrame(animLoop);
-  } else if (gameover);
-    gameoverNotif.addEventListener('click',() => {
+    } else if (gameover) {
+      gameoverNotif.addEventListener('click',() => {
       gameoverNotif.style.display = 'none';
       startGame();
-    });
- 
+      });
+    };
+
 }
 
+
+//   if (!gameover) {
+//     raf = requestAnimationFrame(animLoop);
+//     } else if (win) {
+//       winNotif.addEventListener('click',() => {
+//       winNotif.style.display = 'none';
+//       startGame();
+//       });
+//     } else if (gameover) {
+//       gameoverNotif.addEventListener('click',() => {
+//       gameoverNotif.style.display = 'none';
+//       startGame();
+//       });
+//     };
+
+// }
 
 
 function startGame() {
