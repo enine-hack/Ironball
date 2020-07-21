@@ -5,10 +5,10 @@ let leftPressed = false;
 let ball;
 let gameover = false;
 let $gameoverNotif = document.querySelector('.game-over');
+let win = false;
 let $winNotif = document.querySelector('.win');
 
 let bricksArray = [];
-
 //CREATION BRIQUES MANUELLE
 // let brick00;
 // let brick01;
@@ -24,6 +24,8 @@ let bricksArray = [];
 // let brick14;
 // let brick15;
 // let brick16;
+
+let speedUpItems;
 
 const ctx = document.getElementById('canvas').getContext('2d');
 const W = ctx.canvas.width;
@@ -42,6 +44,8 @@ function drawAll() {
       bricks.draw();
     }
   }
+
+  speedUpItems.draw();
 
 }
 
@@ -118,13 +122,12 @@ function animLoop() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
-//  COLLISION => LA BALLE NE DETRUIT PAS LA PREMIERE LIGNE !!
+//  COLLISION
   function collision () {
     for(let i = 0; i < bricksArray.length ; i ++) {
       let n = 1; // le nombre de brique à supprime
-      
-      if(ball.x + ball.dx > bricksArray[i].x && ball.x + ball.dx < bricksArray[i].x + bricksArray[i].l && 
-      ball.y + ball.dy > bricksArray[i].y && ball.y + ball.dy < bricksArray[i].y + bricksArray[i].h) {
+      if(ball.x >= bricksArray[i].x && ball.x <= bricksArray[i].x + bricksArray[i].l && 
+      ball.y >= bricksArray[i].y && ball.y <= bricksArray[i].y + bricksArray[i].h*2 + ball.radius) {
         ball.dy = -ball.dy;
         bricksArray[i].hitted = true;
         bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
@@ -135,21 +138,36 @@ function animLoop() {
   
   collision();
   
-  if(bricksArray = []) {
+  if(!bricksArray.length) {
+      win = true;
       $winNotif.style.display = 'flex';
       return;
       }
 
-  // GAMEOVER
+//  SPEED UP ITEMS
+if(ball.x >= speedUpItems.x && ball.x <= speedUpItems.x + speedUpItems.l
+  && ball.y >= speedUpItems.y && speedUpItems.y <= speedUpItems.y + speedUpItems.h) {
+    ball.dx = 7;
+    ball.dy = -7;
+  }
+
+// GAMEOVER = ELSE IF NE MARCHE PAS
   if (!gameover) {
     raf = requestAnimationFrame(animLoop);
-    } else if (gameover) {
+    } else if(gameover) {
+      console.log('ca marche')
       $gameoverNotif.addEventListener('click',() => {
+        
       $gameoverNotif.style.display = 'none';
       startGame();
       });
-    };
-
+      
+    } else if(win) {
+      $winNotif.addEventListener('click',() => {
+      $winNotif.style.display = 'none';
+      startGame();
+      });
+    }
 }
 
 function startGame() {
@@ -161,7 +179,7 @@ function startGame() {
   ball = new Ball();
   for (let i = 0; i < 7; i++) {
     // i: 0
-    for (let j = 0; j < 3; j++) {
+    for (let j = 0; j < 12; j++) {
       // i:0, j:0
       // i:0, j:1
 
@@ -197,6 +215,8 @@ function startGame() {
   // brick15 = new Bricks(830,20);
   // brick16 = new Bricks(995,20);
   // bricksArray.push(brick10, brick11, brick12, brick13, brick14, brick15, brick16);
+
+  speedUpItems = new speedUpItem();
 
   animLoop();
      
