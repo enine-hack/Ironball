@@ -132,8 +132,8 @@ function animLoop() {
   function collision () {
     for(let i = 0; i < bricksArray.length ; i ++) {
       let n = 1; // le nombre de brique à supprime
-      if(ball.x >= bricksArray[i].x && ball.x <= bricksArray[i].x + bricksArray[i].l && 
-      ball.y >= bricksArray[i].y && ball.y <= bricksArray[i].y + bricksArray[i].h*2 + ball.radius) {
+      if(ball.x + ball.radius >= bricksArray[i].x && ball.x + ball.radius <= bricksArray[i].x + bricksArray[i].l && 
+      ball.y + ball.radius >= bricksArray[i].y && ball.y + ball.radius <= bricksArray[i].y + bricksArray[i].h*2 + ball.radius) {
         ball.dy = -ball.dy;
         bricksArray[i].hitted = true;
         bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
@@ -143,30 +143,38 @@ function animLoop() {
       }
   
   collision();
-  
+
+// NO MORE BRICKS
   if(!bricksArray.length) {
       win = true;
-      $winNotif.style.display = 'flex';
-      return;
-      }
+  }
 
 //  SPEED UP ITEMS
   if(ball.x >= speedUpItems.x && ball.x <= speedUpItems.x + speedUpItems.l
     && ball.y >= speedUpItems.y && ball.y <= speedUpItems.y + speedUpItems.h*2) {
       ball.dx = 10;
       ball.dy = -10;
-    }
-
-  if (gameover) {
-    $gameoverNotif.style.display = 'flex';
-        
+  }
+// NOT GAMEOVER 
+if (!gameover) {
+  raf = requestAnimationFrame(animLoop);
   }
 
 
-// GAMEOVER = ELSE IF NE MARCHE PAS
-  if (!gameover) {
-    raf = requestAnimationFrame(animLoop);
-    }
+// GAMEOVER OR WIN
+  if (gameover) {
+    // si game over, afficher notif game over
+    $gameoverNotif.style.display = 'flex';
+  } 
+  
+  if (win) {
+    // si win, effacer le canvas puis afficher notif win
+    ctx.clearRect(0, 0, W, H);
+    $winNotif.style.display = 'flex';
+    cancelAnimationFrame(raf);
+    
+  }
+
 }
 
 function startGame() {
@@ -177,9 +185,9 @@ function startGame() {
 
   paddle = new Paddle();
   ball = new Ball();
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 1; i++) { //7
     // i: 0
-    for (let j = 0; j < 12; j++) {
+    for (let j = 0; j < 1; j++) {
       // i:0, j:0
       // i:0, j:1
 
@@ -217,24 +225,35 @@ function startGame() {
   // bricksArray.push(brick10, brick11, brick12, brick13, brick14, brick15, brick16);
 
   speedUpItems = new SpeedUpItem();
-    
-  
 
   animLoop();
      
 };
 
+// ON CLICK GAME OVER OU WIN
+
 $gameoverNotif.addEventListener('click', () => {
-  console.log('hr');
   // si on me clique dessus sans que je sois gameover, STOP
   if (!gameover) return;
-  console.log('oo');
-
-
+  
   // sinon
   $gameoverNotif.style.display = 'none';
   startGame();
-})
+});
+
+$winNotif.addEventListener('click', () => {
+  console.log('cliqué');
+  
+  // si on me clique dessus sans que je sois win, STOP
+  if (!win) return;
+  
+  // sinon
+  $winNotif.style.display = 'none';
+  startGame();
+});
+
+
+
 
 let $bouton = document.querySelector('#start-button');
 $bouton.addEventListener('click', () => {
