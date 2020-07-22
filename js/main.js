@@ -31,6 +31,11 @@ const ctx = document.getElementById('canvas').getContext('2d');
 const W = ctx.canvas.width;
 const H = ctx.canvas.height;
 
+
+
+
+
+
 function drawAll() {
   //dessiner mon plateau
   paddle.draw();
@@ -51,8 +56,7 @@ function drawAll() {
     speedUpItems = new SpeedUpItem()
   }
   speedUpItems.draw()
-  
-
+ 
 }
 
 // faire bouger mon plateau
@@ -75,6 +79,12 @@ function keyUpRelease(direction) {
   }
 }
 
+// Son éclat de birque
+function playBrickPopSound() {
+  let brickPopSound = document.getElementById('pop');
+  brickPopSound.play();
+};
+
 
 let raf;
 let frames = 0;
@@ -87,8 +97,6 @@ function animLoop() {
 
   // tout redessiner
   drawAll();
-
-
 
   // faire bouger le paddle droite-gauche
   if(rightPressed && paddle.r < W && paddle.x < W-paddle.x+paddle.r) {
@@ -132,17 +140,21 @@ function animLoop() {
   function collision () {
     for(let i = 0; i < bricksArray.length ; i ++) {
       let n = 1; // le nombre de brique à supprime
-      if(ball.x + ball.radius >= bricksArray[i].x && ball.x + ball.radius <= bricksArray[i].x + bricksArray[i].l && 
-      ball.y + ball.radius >= bricksArray[i].y && ball.y + ball.radius <= bricksArray[i].y + bricksArray[i].h*2 + ball.radius) {
+      if(ball.x + ball.dx + ball.radius >= bricksArray[i].x && ball.x + ball.dx + ball.radius <= bricksArray[i].x + bricksArray[i].l && 
+      ball.y + ball.dy + ball.radius >= bricksArray[i].y && ball.y + ball.dy + ball.radius <= bricksArray[i].y + bricksArray[i].h*2 + ball.radius) {
         ball.dy = -ball.dy;
         bricksArray[i].hitted = true;
         bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
-        }
+        playBrickPopSound();
       }
-        return bricksArray;
-      }
-  
+      
+    }
+    return bricksArray;
+  }
+    
   collision();
+  
+ 
 
 // NO MORE BRICKS
   if(!bricksArray.length) {
@@ -185,9 +197,9 @@ function startGame() {
 
   paddle = new Paddle();
   ball = new Ball();
-  for (let i = 0; i < 1; i++) { //7
+  for (let i = 0; i < 7; i++) { //7
     // i: 0
-    for (let j = 0; j < 1; j++) {
+    for (let j = 0; j < 14; j++) {
       // i:0, j:0
       // i:0, j:1
 
@@ -261,12 +273,7 @@ $bouton.addEventListener('click', () => {
   document.querySelector(".start-item").style.visibility = "hidden";
   // démarrer le jeu
   startGame();
-
-  
 });
-
-
-
 
 
 
