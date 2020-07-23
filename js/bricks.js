@@ -10,25 +10,29 @@ class Bricks {
         this.color = '#ba1c1c';
         this.hitted = false;
         
-        this.disappearing = false;
-        this.disappearingStep = 0;
+        // this.disappearing = false;
+        // this.disappearingStep = 0; // grossi
+        
 
         
     }
 
     // draw() {
-       
-
     //     if (this.disappearing) {
     //         switch (disappearingStep) {
     //           case 0:
-    //               //ctx.
-    //               break;
+    //             ctx.beginPath()
+    //             ctx.fillStyle = 'green';
+    //             ctx.closePath();
+    //             break;
     //           case 1:
-
+    //             ctx.beginPath()
+    //             ctx.fillStyle = 'pink';
+    //             ctx.closePath();
+    //             break;
     //         }
-
     //         this.disappearingStep++;
+
     //     } else {
     //         ctx.beginPath();
     //         ctx.fillStyle = this.color;

@@ -50,8 +50,6 @@ function drawAll() {
     }
   }
 
-  //setInterval(speedUpItems.draw(), 1000);
- 
   if (frames % 500 === 0) {
     speedUpItems = new SpeedUpItem()
   }
@@ -79,7 +77,7 @@ function keyUpRelease(direction) {
   }
 }
 
-// Son éclat de birque
+// sound
 function playBrickPopSound() {
   let brickPopSound = document.getElementById('pop');
   brickPopSound.play();
@@ -147,7 +145,6 @@ function animLoop() {
         bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
         playBrickPopSound();
       }
-      
     }
     return bricksArray;
   }
@@ -199,7 +196,7 @@ function startGame() {
   ball = new Ball();
   for (let i = 0; i < 7; i++) { //7
     // i: 0
-    for (let j = 0; j < 14; j++) {
+    for (let j = 0; j < 14; j++) { //14
       // i:0, j:0
       // i:0, j:1
 
@@ -211,7 +208,6 @@ function startGame() {
 
       // i:3, j:0
       // ...
-
       bricksArray.push(new Bricks(i*165 +5, j*55 -35))
 
     }
@@ -254,7 +250,7 @@ $gameoverNotif.addEventListener('click', () => {
 });
 
 $winNotif.addEventListener('click', () => {
-  console.log('cliqué');
+  console.log('cliqué'); //ca fonctionne
   
   // si on me clique dessus sans que je sois win, STOP
   if (!win) return;
@@ -262,6 +258,7 @@ $winNotif.addEventListener('click', () => {
   // sinon
   $winNotif.style.display = 'none';
   startGame();
+
 });
 
 

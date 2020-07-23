@@ -2,7 +2,7 @@ class Paddle {
     constructor() {
 
         this.l = 170;
-        this.h = 25;
+        this.h = 30;
         this.x = (W - this.l) /2;
         this.y = H-90;
         this.color = 'blue';
@@ -12,13 +12,18 @@ class Paddle {
         this.b = this.y + this.h;
         this.radius = 10;
 
+        // Commun yeux
+        this.eyescolor = "pink"
+        this.eyeradius = 10
+        
+        // Oeil gauche
+        this.xLeftEye = this.x + 20
+        this.yLeftEye = this.y + 30;
+
 
     }
     
-    // draw() {
-    //     ctx.fillStyle = this.color;
-    //     ctx.fillRect(this.x, this.y, this.l, this.h);
-    // }
+
 
     draw() {
         ctx.beginPath();
@@ -34,6 +39,9 @@ class Paddle {
         ctx.quadraticCurveTo(this.x, this.y, this.x+this.radius, this.y);
         ctx.fill();
         ctx.closePath();
+
+  
+
       }
     
         

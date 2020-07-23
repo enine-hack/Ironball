@@ -4,7 +4,7 @@ function random(from, to) {
   
   class SpeedUpItem {
     constructor() {
-      this.l = 50;
+      this.l = 70;
       this.h = 20;
       this.x = random(0, W-this.l + 3);
       this.y = random(H/2, 3/4*H); // between 1/2 and 3/4 of H
