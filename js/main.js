@@ -118,9 +118,9 @@ function animLoop() {
     // inverser la direction de y
     ball.dy = -ball.dy;
     // si la position y est > à la position y depasse le canvas en bas (ordonnees y inversées !)
-  } else if(ball.y + ball.dy >= paddle.y - ball.radius) {
+  } else if(ball.y + ball.dy > paddle.y - ball.radius) {
     // si la balle atteri sur le paddle => si la balle est à droite du bord gauche du paddle ET < au bord droit du paddle
-      if(ball.x >= paddle.x && ball.x <= paddle.x + paddle.l) {
+      if(ball.x > paddle.x && ball.x < paddle.x + paddle.l) {
         // inverser la direction de y
         ball.dy = -ball.dy;
       } else if(ball.y + ball.dy >= H + ball.radius) {
@@ -161,8 +161,8 @@ function animLoop() {
 //  SPEED UP ITEMS
   if(ball.x >= speedUpItems.x && ball.x <= speedUpItems.x + speedUpItems.l
     && ball.y >= speedUpItems.y && ball.y <= speedUpItems.y + speedUpItems.h*2) {
-      ball.dx = 10;
-      ball.dy = -10;
+      ball.dx = 7;
+      ball.dy = -7;
   }
 // NOT GAMEOVER 
 if (!gameover) {
