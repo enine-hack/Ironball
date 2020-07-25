@@ -138,10 +138,11 @@ function animLoop() {
   function collision () {
     for(let i = 0; i < bricksArray.length ; i ++) {
       let n = 1; // le nombre de brique à supprime
-      if(ball.x >= bricksArray[i].x - ball.radius && ball.x + ball.dx <= bricksArray[i].x + bricksArray[i].l + bricksArray[i].paddingRight && 
+      if(ball.x > bricksArray[i].x - ball.radius && ball.x + ball.dx < bricksArray[i].x + bricksArray[i].l + bricksArray[i].paddingRight && 
       ball.y > bricksArray[i].y - ball.radius && ball.y < bricksArray[i].y + bricksArray[i].h*2.6 + bricksArray[i].paddingBottom) {
         playBrickPopSound();
         ball.dy = -ball.dy;
+        ball.dx = -ball.dx;
         bricksArray[i].hitted = true;
         bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
         
@@ -161,8 +162,8 @@ function animLoop() {
   }
 
 //  SPEED UP ITEMS
-  if(ball.x >= speedUpItems.x && ball.x <= speedUpItems.x + speedUpItems.l
-    && ball.y >= speedUpItems.y && ball.y <= speedUpItems.y + speedUpItems.h*2) {
+  if(ball.x > speedUpItems.x && ball.x < speedUpItems.x + speedUpItems.l
+    && ball.y > speedUpItems.y && ball.y < speedUpItems.y + speedUpItems.h*3) {
       ball.dx = 7;
       ball.dy = -7;
   }

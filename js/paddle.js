@@ -1,7 +1,7 @@
 class Paddle {
     constructor() {
 
-        this.l = 370;
+        this.l = 190;
         this.h = 30;
         this.x = (W - this.l) /2;
         this.y = H-90;
