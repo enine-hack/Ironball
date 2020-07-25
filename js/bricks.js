@@ -10,13 +10,20 @@ class Bricks {
         this.color = '#ba1c1c';
         this.hitted = false;
         
-        // this.disappearing = false;
-        // this.disappearingStep = 0; // grossi
-        
-
-        
     }
 
+    draw() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x+this.paddingRight, this.y+this.h+this.paddingBottom, this.l, this.h);
+        ctx.closePath();
+
+    }
+
+}
+
+        // this.disappearing = false;
+        // this.disappearingStep = 0; // grossi
     // draw() {
     //     if (this.disappearing) {
     //         switch (disappearingStep) {
@@ -41,14 +48,3 @@ class Bricks {
     //     }
                 
     // }
-
-    draw() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x+this.paddingRight, this.y+this.h+this.paddingBottom, this.l, this.h);
-        ctx.closePath();
-    }
-
-}
-
-

@@ -51,9 +51,9 @@ function drawAll() {
   }
 
   if (frames % 500 === 0) {
-    speedUpItems = new SpeedUpItem()
+    speedUpItems = new SpeedUpItem();
   }
-  speedUpItems.draw()
+  speedUpItems.draw();
  
 }
 
@@ -138,12 +138,13 @@ function animLoop() {
   function collision () {
     for(let i = 0; i < bricksArray.length ; i ++) {
       let n = 1; // le nombre de brique à supprime
-      if(ball.x + ball.dx + ball.radius >= bricksArray[i].x && ball.x + ball.dx + ball.radius <= bricksArray[i].x + bricksArray[i].l && 
-      ball.y + ball.dy + ball.radius >= bricksArray[i].y && ball.y + ball.dy + ball.radius <= bricksArray[i].y + bricksArray[i].h*2 + ball.radius) {
+      if(ball.x >= bricksArray[i].x - ball.radius && ball.x + ball.dx <= bricksArray[i].x + bricksArray[i].l + bricksArray[i].paddingRight && 
+      ball.y > bricksArray[i].y - ball.radius && ball.y < bricksArray[i].y + bricksArray[i].h*2.6 + bricksArray[i].paddingBottom) {
+        playBrickPopSound();
         ball.dy = -ball.dy;
         bricksArray[i].hitted = true;
         bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
-        playBrickPopSound();
+        
       }
     }
     return bricksArray;
@@ -154,8 +155,9 @@ function animLoop() {
  
 
 // NO MORE BRICKS
-  if(!bricksArray.length) {
+  if(bricksArray.length === 0) {
       win = true;
+      console.log(win);
   }
 
 //  SPEED UP ITEMS
@@ -178,9 +180,10 @@ if (!gameover) {
   
   if (win) {
     // si win, effacer le canvas puis afficher notif win
+    cancelAnimationFrame(raf);
     ctx.clearRect(0, 0, W, H);
     $winNotif.style.display = 'flex';
-    cancelAnimationFrame(raf);
+    
     
   }
 
@@ -188,6 +191,7 @@ if (!gameover) {
 
 function startGame() {
   gameover = false;
+  win = false;
   if (raf) {
     cancelAnimationFrame(raf);
   }
@@ -196,7 +200,7 @@ function startGame() {
   ball = new Ball();
   for (let i = 0; i < 7; i++) { //7
     // i: 0
-    for (let j = 0; j < 14; j++) { //14
+    for (let j = 0; j < 10; j++) { //10
       // i:0, j:0
       // i:0, j:1
 
@@ -212,7 +216,7 @@ function startGame() {
 
     }
   };
-
+  // bricksArray.push(new Bricks(800,55))
   //brickxy = newBricks(x,y)
   //brick00 = new Bricks(5,-35)
   // brick01 = new Bricks(170,-35);

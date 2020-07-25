@@ -7,12 +7,6 @@ class Ball {
         this.radius = 20;
         this.color = '#fffc2e';
         this.colortrainee1 = 'rgba(255, 252, 46, 0.7)'
-
-        
-
-
-        
-
     }
 
     draw() {
@@ -33,14 +27,10 @@ class Ball {
             ctx.fillStyle = this.color;
             ctx.closePath();
             ctx.fill()
- 
-            
+    
         }
-        
-            
-
-
-}
+     
+    }
 
     
 
