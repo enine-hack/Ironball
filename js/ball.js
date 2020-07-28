@@ -6,10 +6,8 @@ class Ball {
         this.dy = -5;
         this.radius = 20;
         this.color = '#fffc2e';
-        this.colortrainee1 = 'rgba(255, 255, 255, 0.4)'
+        this.colortrainee1 = 'rgba(255, 255, 255, 0.4)';
     }
-
-    'rgba(255, 252, 46, 0.4)'
 
     draw() {
         // Tracé de la balle
@@ -29,13 +27,8 @@ class Ball {
             ctx.fillStyle = this.color;
             ctx.closePath();
             ctx.fill()
-    
         }
-     
     }
-
-    
-
 };
 
 

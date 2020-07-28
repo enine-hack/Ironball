@@ -17,11 +17,11 @@ class Bricks {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x+this.paddingRight, this.y+this.h+this.paddingBottom, this.l, this.h);
         ctx.closePath();
-
     }
 
 }
 
+// code pour disparition grossie + shadow
         // this.disappearing = false;
         // this.disappearingStep = 0; // grossi
     // draw() {

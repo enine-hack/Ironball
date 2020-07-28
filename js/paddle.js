@@ -12,18 +12,8 @@ class Paddle {
         this.b = this.y + this.h;
         this.radius = 10;
 
-        // Commun yeux
-        this.eyescolor = "pink"
-        this.eyeradius = 10
-        
-        // Oeil gauche
-        this.xLeftEye = this.x + 20
-        this.yLeftEye = this.y + 30;
-
-
     }
     
-
 
     draw() {
         ctx.beginPath();
@@ -39,13 +29,7 @@ class Paddle {
         ctx.quadraticCurveTo(this.x, this.y, this.x+this.radius, this.y);
         ctx.fill();
         ctx.closePath();
-
-  
-
       }
-    
-        
-
 }
 
 

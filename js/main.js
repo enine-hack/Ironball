@@ -9,7 +9,8 @@ let win = false;
 let $winNotif = document.querySelector('.win');
 
 let bricksArray = [];
-//CREATION BRIQUES MANUELLE
+//CREATION BRIQUES MANUEL
+// ROW01
 // let brick00;
 // let brick01;
 // let brick02;
@@ -17,6 +18,8 @@ let bricksArray = [];
 // let brick04;
 // let brick05;
 // let brick06;
+// let brick07;
+// ROW 02
 // let brick10;
 // let brick11;
 // let brick12;
@@ -24,16 +27,13 @@ let bricksArray = [];
 // let brick14;
 // let brick15;
 // let brick16;
+// let brick17
 
 let speedUpItems;
 
 const ctx = document.getElementById('canvas').getContext('2d');
 const W = ctx.canvas.width;
 const H = ctx.canvas.height;
-
-
-
-
 
 
 function drawAll() {
@@ -50,6 +50,7 @@ function drawAll() {
     }
   }
 
+  // dessiner mon petit plateau : temporalité différente
   if (frames % 500 === 0) {
     speedUpItems = new SpeedUpItem();
   }
@@ -81,7 +82,7 @@ function keyUpRelease(direction) {
 function playBrickPopSound() {
   let brickPopSound = document.getElementById('pop');
   brickPopSound.play();
-};
+}
 
 
 let raf;
@@ -92,15 +93,13 @@ function animLoop() {
   // effacer le canvas
   ctx.clearRect(0,0,W,H)
   
-
   // tout redessiner
   drawAll();
 
   // faire bouger le paddle droite-gauche
   if(rightPressed && paddle.r < W && paddle.x < W-paddle.x+paddle.r) {
     paddle.x += paddle.dx;
-    paddle.r += paddle.dx;
-    
+    paddle.r += paddle.dx;    
   } else if(leftPressed && paddle.x > 0) {
     paddle.x -= paddle.dx;
     paddle.r -= paddle.dx;
@@ -125,8 +124,7 @@ function animLoop() {
         ball.dy = -ball.dy;
       } else if(ball.y + ball.dy >= H + ball.radius) {
         // afficher gameover
-        gameover = true
-
+        gameover = true;
       }
   }
 
@@ -136,16 +134,20 @@ function animLoop() {
 
 //  COLLISION
   function collision () {
-    for(let i = 0; i < bricksArray.length ; i ++) {
+    for(let i = 0 ; i < bricksArray.length ; i ++) {
       let n = 1; // le nombre de brique à supprime
+      // si la balle touche une brique
       if(ball.x > bricksArray[i].x - ball.radius && ball.x + ball.dx < bricksArray[i].x + bricksArray[i].l + bricksArray[i].paddingRight && 
       ball.y > bricksArray[i].y - ball.radius && ball.y < bricksArray[i].y + bricksArray[i].h*2.6 + bricksArray[i].paddingBottom) {
+        // emettre le son
         playBrickPopSound();
+        // changer de direction
         ball.dy = -ball.dy;
         ball.dx = -ball.dx;
+        // la brique est touchée
         bricksArray[i].hitted = true;
+        // la brique est supprimée du tableau
         bricksArray.splice(bricksArray.indexOf(bricksArray[i]), n);
-        
       }
     }
     return bricksArray;
@@ -153,25 +155,23 @@ function animLoop() {
     
   collision();
   
- 
-
-// NO MORE BRICKS
+// s'il n'y a plus de briques dans mon tableau
   if(bricksArray.length === 0) {
       win = true;
       console.log(win);
   }
 
-//  SPEED UP ITEMS
+//  si la balle touche un petit plateau
   if(ball.x > speedUpItems.x && ball.x < speedUpItems.x + speedUpItems.l
     && ball.y > speedUpItems.y && ball.y < speedUpItems.y + speedUpItems.h*3) {
       ball.dx = 7;
       ball.dy = -7;
   }
+
 // NOT GAMEOVER 
 if (!gameover) {
   raf = requestAnimationFrame(animLoop);
   }
-
 
 // GAMEOVER OR WIN
   if (gameover) {
@@ -184,8 +184,6 @@ if (!gameover) {
     cancelAnimationFrame(raf);
     ctx.clearRect(0, 0, W, H);
     $winNotif.style.display = 'flex';
-    
-    
   }
 
 }
@@ -201,7 +199,7 @@ function startGame() {
   ball = new Ball();
   for (let i = 0; i < 7; i++) { //7
     // i: 0
-    for (let j = 0; j < 10; j++) { //10
+    for (let j = 0; j < 10; j++) { // 10
       // i:0, j:0
       // i:0, j:1
 
@@ -213,7 +211,7 @@ function startGame() {
 
       // i:3, j:0
       // ...
-      bricksArray.push(new Bricks(i*165 +5, j*55 -35))
+      bricksArray.push(new Bricks(i*165 +5, j*55 -35));
 
     }
   };
