@@ -1,8 +1,8 @@
 class Paddle {
     constructor() {
 
-        this.l = 200;
-        this.h = 50;
+        this.l = 180;
+        this.h = 20;
         this.x = (W - this.l) /2;
         this.y = H-90;
         this.color = 'blue';
