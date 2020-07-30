@@ -241,7 +241,7 @@ function startGame() {
 
       // i:3, j:0
       // ...
-      bricksArray.push(new Bricks(i*165 +5+22, j*55 -35+50));
+      bricksArray.push(new Bricks(i*165 +5+22, j*55 -35+50+10));
 
     }
   };
