@@ -84,6 +84,11 @@ function playBrickPopSound() {
   brickPopSound.play();
 }
 
+function playAmbianceSound() {
+  let ambianceSound = document.getElementById('ambiance');
+  ambianceSound.play();
+}
+
 
 let raf;
 let frames = 0;
@@ -189,6 +194,7 @@ if (!gameover) {
 }
 
 function startGame() {
+  
   gameover = false;
   win = false;
   if (raf) {
@@ -271,8 +277,10 @@ let $bouton = document.querySelector('#start-button');
 $bouton.addEventListener('click', () => {
   // masquer la div
   document.querySelector(".start-item").style.visibility = "hidden";
+  playAmbianceSound();
   // démarrer le jeu
   startGame();
+
 });
 
 

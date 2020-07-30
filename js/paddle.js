@@ -1,8 +1,8 @@
 class Paddle {
     constructor() {
 
-        this.l = 190;
-        this.h = 30;
+        this.l = 200;
+        this.h = 50;
         this.x = (W - this.l) /2;
         this.y = H-90;
         this.color = 'blue';
@@ -11,6 +11,10 @@ class Paddle {
         this.r = this.x + this.l;
         this.b = this.y + this.h;
         this.radius = 10;
+
+        
+
+
 
     }
     
@@ -29,6 +33,8 @@ class Paddle {
         ctx.quadraticCurveTo(this.x, this.y, this.x+this.radius, this.y);
         ctx.fill();
         ctx.closePath();
+        ctx.save()
+        
       }
 }
 
