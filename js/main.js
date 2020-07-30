@@ -87,6 +87,13 @@ function playBrickPopSound() {
 function playAmbianceSound() {
   let ambianceSound = document.getElementById('ambiance');
   ambianceSound.play();
+   
+}
+
+function pauseAmbianceSound() {
+  let ambianceSound = document.getElementById('ambiance');
+  ambianceSound.currentTime = 0;
+  ambianceSound.pause();
 }
 
 
@@ -137,13 +144,25 @@ function animLoop() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
+//ball.x > bricksArray[i].x - ball.radius && ball.x + ball.dx < bricksArray[i].x + bricksArray[i].l + bricksArray[i].paddingRight && 
+// ball.y > bricksArray[i].y - ball.radius && ball.y < bricksArray[i].y + bricksArray[i].h*2.6 + bricksArray[i].paddingBottom
+
 //  COLLISION
   function collision () {
     for(let i = 0 ; i < bricksArray.length ; i ++) {
       let n = 1; // le nombre de brique à supprime
       // si la balle touche une brique
-      if(ball.x > bricksArray[i].x - ball.radius && ball.x + ball.dx < bricksArray[i].x + bricksArray[i].l + bricksArray[i].paddingRight && 
-      ball.y > bricksArray[i].y - ball.radius && ball.y < bricksArray[i].y + bricksArray[i].h*2.6 + bricksArray[i].paddingBottom) {
+      if (
+        // le cote droit de la balle depasse le cote gauche de la brique (elle est rentree horizontalement dedans)
+        ball.x + ball.radius > bricksArray[i].x &&
+        // le cote gauche de la balle est rentree par la droite de la brique
+        ball.x - ball.radius < bricksArray[i].x + bricksArray[i].l &&
+        // le bas de ma balle est rentree par le haut de ma brique
+        ball.y + ball.radius > bricksArray[i].y &&
+        // le haut de ma balle est rentree par le bas de ma brique
+        ball.y - ball.radius < bricksArray[i].y + bricksArray[i].h
+      ) {
+        console.log('balle en collision avec', bricksArray[i])
         // emettre le son
         playBrickPopSound();
         // changer de direction
@@ -180,8 +199,11 @@ if (!gameover) {
 
 // GAMEOVER OR WIN
   if (gameover) {
+
     // si game over, afficher notif game over
     $gameoverNotif.style.display = 'flex';
+    // couper le son de l'ambiance
+    pauseAmbianceSound();
   } 
   
   if (win) {
@@ -189,12 +211,14 @@ if (!gameover) {
     cancelAnimationFrame(raf);
     ctx.clearRect(0, 0, W, H);
     $winNotif.style.display = 'flex';
+    // couper le son de l'ambiance
+    pauseAmbianceSound();
   }
 
 }
 
 function startGame() {
-  
+  playAmbianceSound()
   gameover = false;
   win = false;
   if (raf) {
@@ -205,7 +229,7 @@ function startGame() {
   ball = new Ball();
   for (let i = 0; i < 7; i++) { //7
     // i: 0
-    for (let j = 0; j < 10; j++) { // 10
+    for (let j = 0; j < 14; j++) { // 10
       // i:0, j:0
       // i:0, j:1
 
